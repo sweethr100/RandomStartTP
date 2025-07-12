@@ -1,0 +1,4 @@
+name: RandomStartTP
+version: '1.0-SNAPSHOT'
+main: seml.randomStartTP.RandomStartTP
+api-version: '1.21'
