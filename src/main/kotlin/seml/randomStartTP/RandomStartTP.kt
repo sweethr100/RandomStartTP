@@ -35,7 +35,7 @@ class RandomStartTP : JavaPlugin(), Listener {
         if (joinedPlayers.contains(player.uniqueId)) return  // 이미 접속한 플레이어 무시
 
         // 처음 접속: 랜덤 위치 생성
-        val world = player.world
+        val world = server.getWorld("world") ?: return
         val minX = config.getInt("range.minX", -1000)
         val maxX = config.getInt("range.maxX", 1000)
         val minZ = config.getInt("range.minZ", -1000)
@@ -50,6 +50,8 @@ class RandomStartTP : JavaPlugin(), Listener {
             val location = Location(world, x.toDouble(), y.toDouble(), z.toDouble())
             if (isSafeLocation(location)) {
                 player.teleport(location)
+                player.setBedSpawnLocation(location, true)  // 추가: 스폰 포인트 설정 (강제)
+
                 joinedPlayers.add(player.uniqueId)
                 return
             }
